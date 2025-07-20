@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Código Ciclovolt</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="icons/icon-192.png">
+</head>
+<body>
+  <main class="container">
+    <h1>🚴‍♂️ Código Ciclovolt</h1>
+    <p class="subtitle">Elige un modo para comenzar la experiencia</p>
+
+    <div class="status" id="status">🔄 Conectando con la base de datos...</div>
+
+    <div class="buttons">
+      <a href="admin.html" class="button creator">🔧 Modo Creador</a>
+      <a href="game.html" class="button player disabled" id="playButton">🎮 Modo Jugador</a>
+    </div>
+  </main>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabaseUrl = 'https://ivpcempasgfwtahfcffu.supabase.co'; // ← Cambia esto
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2cGNlbXBhc2dmd3RhaGZjZmZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwMjk0MDcsImV4cCI6MjA2ODYwNTQwN30.vb7-I3Zwc4qtns7JWJ695k7Eiwx84RP42m1WhUlsUdQ'; // ← Cambia esto
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const statusEl = document.getElementById("status");
+    const playBtn = document.getElementById("playButton");
+
+    async function checkTestsAvailable() {
+      try {
+        const { data, error } = await supabase
+          .from('pruebas')
+          .select('*')
+          .limit(1);
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          statusEl.textContent = "✅ Pruebas disponibles. ¡Puedes jugar!";
+          playBtn.classList.remove("disabled");
+          playBtn.href = "game.html";
+        } else {
+          statusEl.textContent = "⚠️ No hay pruebas cargadas aún. Contacta con el organizador.";
+          playBtn.classList.add("disabled");
+          playBtn.href = "#";
+        }
+      } catch (err) {
+        statusEl.textContent = "❌ Error de conexión con Supabase.";
+        console.error("Error al conectar con Supabase:", err);
+        playBtn.classList.add("disabled");
+        playBtn.href = "#";
+      }
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+    checkTestsAvailable();
+  </script>
+</body>
+</html>
+
