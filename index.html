@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CicloAventura - Juego</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <h1>🚴‍♂️ CicloAventura</h1>
+    <p>Explora, resuelve y pedalea hacia la victoria</p>
+  </header>
+  <main id="game-container">
+    <section id="narrative-screen" class="screen">
+      <h2>Bienvenido a CicloAventura</h2>
+      <p>En un futuro cercano, solo las bicicletas pueden salvar el planeta. Tú y tu equipo deberéis resolver pruebas a lo largo de la ciudad usando pistas, el GPS y vuestra inteligencia. Cada decisión cuenta. ¿Estás listo para comenzar?</p>
+      <div id="narrative-media"></div>
+      <button onclick="startGame()">Comenzar aventura</button>
+    </section>
+
+    <section id="question-screen" class="screen hidden">
+      <h2 id="question-title"></h2>
+      <p id="question-text"></p>
+      <div id="question-media"></div>
+      <div id="map" class="map-container"></div>
+      <input type="text" id="answer-input" placeholder="Introduce tu respuesta">
+      <div class="hints">
+        <button onclick="useHint(0)">Pista 1</button>
+        <button onclick="useHint(1)">Pista 2</button>
+        <button onclick="useHint(2)">Pista 3</button>
+        <div id="hints-output"></div>
+      </div>
+      <div>
+        <button onclick="submitAnswer()">Enviar respuesta</button>
+        <p id="response-message"></p>
+      </div>
+    </section>
+
+    <section id="final-screen" class="screen hidden">
+      <h2>¡Aventura completada!</h2>
+      <p>Has terminado el recorrido. Consulta tu puntuación y clasificación. ¡Gracias por jugar!</p>
+      <div id="scoreboard"></div>
+      <button onclick="restartGame()">Jugar de nuevo</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CicloAventura. App privada para uso personal.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

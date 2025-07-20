@@ -1,0 +1,98 @@
+/* styles.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4fcf8;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: #34a853;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+.screen {
+  display: none;
+  max-width: 700px;
+  margin: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.screen.visible {
+  display: block;
+}
+
+button {
+  background-color: #34a853;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2a8a43;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.map-container {
+  height: 300px;
+  margin-top: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.hints button {
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  background-color: #fbbc05;
+}
+
+#hints-output {
+  margin-top: 0.5rem;
+  color: #555;
+  font-style: italic;
+}
+
+footer {
+  background: #eee;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+#question-media img, #question-media audio, #narrative-media img, #narrative-media audio {
+  display: block;
+  max-width: 100%;
+  margin: 1rem 0;
+}
