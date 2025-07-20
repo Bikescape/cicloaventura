@@ -101,6 +101,10 @@ function finishGame() {
   const duration = Math.floor((Date.now() - startTime) / 1000);
   document.getElementById('question-screen').classList.add('hidden');
   document.getElementById('final-screen').classList.remove('hidden');
+
+  const nombre = prompt('Introduce tu nombre para la clasificación:');
+  guardarJugador(nombre, currentScore, duration);
+
   document.getElementById('scoreboard').innerHTML = `<p>Puntuación: ${currentScore} pts</p><p>Tiempo: ${duration} segundos</p>`;
 }
 
@@ -114,3 +118,19 @@ window.addEventListener('load', async () => {
   await fetchQuestions();
   document.getElementById('narrative-screen').classList.add('visible');
 });
+
+async function guardarJugador(nombre, puntuacion, duracion) {
+  const res = await fetch(`${supabaseUrl}/rest/v1/jugadores`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nombre,
+      puntuacion,
+      duracion,
+      fecha_juego: new Date().toISOString()
+    })
+  });
+}
