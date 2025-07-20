@@ -1,0 +1,21 @@
+{
+  "name": "Caza del Tesoro Ciclovolt",
+  "short_name": "Ciclovolt",
+  "start_url": "/game.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "description": "Juego de exploración con GPS y pistas",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

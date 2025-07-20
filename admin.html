@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CicloAventura - Creador</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h1>🎮 Panel de Creador - CicloAventura</h1>
+  </header>
+  <main>
+    <section id="form-section">
+      <h2>Nueva prueba / Editar prueba</h2>
+      <form id="prueba-form">
+        <input type="hidden" id="prueba-id">
+
+        <label>Título:</label>
+        <input type="text" id="titulo" required>
+
+        <label>Descripción:</label>
+        <textarea id="descripcion" rows="3" required></textarea>
+
+        <label>Latitud:</label>
+        <input type="number" id="latitud" step="any" required>
+
+        <label>Longitud:</label>
+        <input type="number" id="longitud" step="any" required>
+
+        <label>Imagen URL:</label>
+        <input type="text" id="imagen_url">
+
+        <label>Audio URL:</label>
+        <input type="text" id="audio_url">
+
+        <label>Pista 1:</label>
+        <input type="text" id="pista1">
+
+        <label>Pista 2:</label>
+        <input type="text" id="pista2">
+
+        <label>Pista 3:</label>
+        <input type="text" id="pista3">
+
+        <label>Respuesta:</label>
+        <input type="text" id="respuesta" required>
+
+        <button type="submit">Guardar prueba</button>
+        <button type="button" id="cancelar">Cancelar</button>
+      </form>
+    </section>
+
+    <section id="lista-section">
+      <h2>Listado de Pruebas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Título</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="pruebas-lista"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CicloAventura - Gestión de contenidos</p>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>

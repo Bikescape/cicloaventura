@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CicloAventura - Juego</title>
+  <link rel="stylesheet" href="game.css">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registrado'))
+      .catch(err => console.error('SW error:', err));
+  }
+</script>
+
+</head>
+<body>
+  <header>
+    <h1>🚲 CicloAventura</h1>
+  </header>
+  <main>
+    <section id="pantalla-intro">
+      <p>Bienvenido a la aventura en bici. Prepárate para resolver enigmas, encontrar lugares y salvar el planeta.</p>
+      <button id="iniciar-juego">Comenzar</button>
+    </section>
+
+    <section id="pantalla-prueba" style="display: none">
+      <h2 id="titulo-prueba"></h2>
+      <img id="imagen-prueba" src="" alt="Imagen de la prueba">
+      <audio id="audio-prueba" controls></audio>
+      <p id="descripcion-prueba"></p>
+
+      <div id="pistas">
+        <button class="btn-pista" data-num="1">Mostrar pista 1</button>
+        <button class="btn-pista" data-num="2">Mostrar pista 2</button>
+        <button class="btn-pista" data-num="3">Mostrar pista 3</button>
+        <div id="texto-pista"></div>
+      </div>
+
+      <label>Respuesta:</label>
+      <input type="text" id="respuesta-jugador">
+      <button id="comprobar-respuesta">Comprobar</button>
+
+      <p id="resultado"></p>
+    </section>
+
+    <section id="pantalla-final" style="display: none">
+      <h2>🎉 ¡Has completado la CicloAventura!</h2>
+      <p id="ranking-final"></p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 CicloAventura - Juego</p>
+  </footer>
+  <script src="game.js"></script>
+</body>
+</html>
