@@ -1,3 +1,5 @@
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
 // ⚠️ Sustituye por tus claves reales de Supabase
 const SUPABASE_URL = 'https://ivpcempasgfwtahfcffu.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2cGNlbXBhc2dmd3RhaGZjZmZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMwMjk0MDcsImV4cCI6MjA2ODYwNTQwN30.vb7-I3Zwc4qtns7JWJ695k7Eiwx84RP42m1WhUlsUdQ';
@@ -8,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cancelarBtn = document.getElementById("cancelar");
   const lista = document.getElementById("pruebas-lista");
 
-  if (!pruebaForm) {
-    console.error("No se encontró el formulario con id 'prueba-form'");
+  if (!pruebaForm || !cancelarBtn || !lista) {
+    console.error("❌ Elementos del DOM no encontrados.");
     return;
   }
 
@@ -26,14 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
       pista1: document.getElementById("pista1").value,
       pista2: document.getElementById("pista2").value,
       pista3: document.getElementById("pista3").value,
-      respuesta: document.getElementById("respuesta").value
+      respuesta: document.getElementById("respuesta").value.trim().toLowerCase()
     };
 
-    const idExistente = document.getElementById("prueba-id").value;
+    const pruebaId = document.getElementById("prueba-id").value;
 
     let resultado;
-    if (idExistente) {
-      resultado = await supabase.from("pruebas").update(nuevaPrueba).eq("id", idExistente);
+    if (pruebaId) {
+      resultado = await supabase.from("pruebas").update(nuevaPrueba).eq("id", pruebaId);
     } else {
       resultado = await supabase.from("pruebas").insert([nuevaPrueba]);
     }
@@ -49,17 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cancelarBtn.addEventListener("click", () => {
     pruebaForm.reset();
+    document.getElementById("prueba-id").value = "";
   });
 
   async function cargarPruebas() {
     const { data, error } = await supabase.from("pruebas").select("*").order("id", { ascending: true });
     if (error) {
-      console.error("Error al cargar pruebas:", error.message);
+      alert("❌ Error al cargar pruebas: " + error.message);
       return;
     }
 
     lista.innerHTML = "";
-    data.forEach((prueba) => {
+    data.forEach(prueba => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${prueba.id}</td>
@@ -76,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.editarPrueba = async (id) => {
     const { data, error } = await supabase.from("pruebas").select("*").eq("id", id).single();
     if (error) {
-      alert("Error al obtener prueba");
+      alert("Error al obtener la prueba");
       return;
     }
 
@@ -98,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const { error } = await supabase.from("pruebas").delete().eq("id", id);
     if (error) {
-      alert("Error al eliminar la prueba: " + error.message);
+      alert("❌ Error al eliminar la prueba: " + error.message);
     } else {
       cargarPruebas();
     }
@@ -106,3 +109,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cargarPruebas();
 });
+

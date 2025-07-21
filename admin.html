@@ -16,34 +16,34 @@
       <form id="prueba-form">
         <input type="hidden" id="prueba-id">
 
-        <label>Título:</label>
+        <label for="titulo">Título:</label>
         <input type="text" id="titulo" required>
 
-        <label>Descripción:</label>
+        <label for="descripcion">Descripción / Narrativa:</label>
         <textarea id="descripcion" rows="3" required></textarea>
 
-        <label>Latitud:</label>
+        <label for="latitud">Latitud:</label>
         <input type="number" id="latitud" step="any" required>
 
-        <label>Longitud:</label>
+        <label for="longitud">Longitud:</label>
         <input type="number" id="longitud" step="any" required>
 
-        <label>Imagen URL:</label>
+        <label for="imagen_url">Imagen URL:</label>
         <input type="text" id="imagen_url">
 
-        <label>Audio URL:</label>
+        <label for="audio_url">Audio URL:</label>
         <input type="text" id="audio_url">
 
-        <label>Pista 1:</label>
+        <label for="pista1">Pista 1:</label>
         <input type="text" id="pista1">
 
-        <label>Pista 2:</label>
+        <label for="pista2">Pista 2:</label>
         <input type="text" id="pista2">
 
-        <label>Pista 3:</label>
+        <label for="pista3">Pista 3:</label>
         <input type="text" id="pista3">
 
-        <label>Respuesta:</label>
+        <label for="respuesta">Respuesta correcta:</label>
         <input type="text" id="respuesta" required>
 
         <button type="submit">Guardar prueba</button>
@@ -68,6 +68,8 @@
     <p>&copy; 2025 CicloAventura - Gestión de contenidos</p>
   </footer>
 
-  <script src="admin.js"></script>
+  <!-- Carga del script al final para garantizar que el DOM ya esté disponible -->
+  <script type="module" src="admin.js"></script>
 </body>
 </html>
+
