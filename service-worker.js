@@ -1,24 +1,30 @@
-const CACHE_NAME = 'ciclovolt-cache-v1';
+const BASE_URL = self.location.pathname.replace(/\/[^\/]*$/, '/'); // Detecta carpeta base
+
+const CACHE_NAME = 'cicloaventura-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/admin.html',
-  '/game.html',
-  '/admin.css',
-  '/admin.js',
-  '/game.css',
-  '/game.js',
-  '/manifest.json',
-  '/assets/icons/icon-192.png',
-  '/assets/icons/icon-512.png'
+  `${BASE_URL}index.html`,
+  `${BASE_URL}admin.html`,
+  `${BASE_URL}game.html`,
+  `${BASE_URL}admin.js`,
+  `${BASE_URL}game.js`,
+  `${BASE_URL}admin.css`,
+  `${BASE_URL}game.css`,
+  `${BASE_URL}manifest.json`,
+  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm',
+  'https://unpkg.com/leaflet/dist/leaflet.css',
+  'https://unpkg.com/leaflet/dist/leaflet.js'
 ];
 
-// Install SW
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(urlsToCache);
+    }).catch(err => {
+      console.error("🚨 Fallo en addAll:", err);
+    })
   );
 });
+
 
 // Fetch from cache or network
 self.addEventListener('fetch', event => {
